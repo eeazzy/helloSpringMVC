@@ -3,14 +3,16 @@
 
 <html>
 <head>
-    <title>학년별 이수 학점 조회</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>검색 결과</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gtvWnlvWkA5Y99PK7fbUMhFtmA5Ep9uF9KXbATIIj//ZvbipqIY2BsmV5IFWbz" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
-    <h2>학년별 이수 학점 조회</h2>
-    <table class="table table-striped">
-        <thead>
+    <h2 class="my-4">검색 결과</h2>
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
         <tr>
             <th>년도</th>
             <th>학기</th>
@@ -19,20 +21,14 @@
         </tr>
         </thead>
         <tbody>
-
-        <c:forEach var="semester" items="${semesterCredits}">
+        <c:forEach var="course" items="${coursesList}">
             <tr>
-                <td>${semester.year}</td>
-                <td>${semester.semester}</td>
-                <td>${semester.totalCredits}</td>
-                <td><a href="${pageContext.request.contextPath}/academic/semester-details?year=${semester.year}&semester=${semester.semester}">링크</a></td>
+                <td>${course.year}</td>
+                <td>${course.semester}</td>
+                <td>${course.credit}</td>
+                <td><a href="#">상세보기</a></td>
             </tr>
         </c:forEach>
-        <tr>
-            <td colspan="2"><strong>총계</strong></td>
-            <td><strong>${totalCredits}</strong></td>
-            <td></td>
-        </tr>
         </tbody>
     </table>
 </div>

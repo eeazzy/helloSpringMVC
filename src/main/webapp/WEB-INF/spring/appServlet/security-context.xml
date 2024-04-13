@@ -13,9 +13,11 @@
 <!--        </security:authentication-provider>-->
         <security:authentication-provider>
             <security:jdbc-user-service data-source-ref="dataSource"
-                   users-by-username-query="select username, password, enabled from users where username=?"
-                   authorities-by-username-query="select username, authority from authorities where username=?" />
+                users-by-username-query="select username, password, true as enabled from Users where username=?"
+                authorities-by-username-query="select username, authority from Authorities where username=?" />
         </security:authentication-provider>
+
+
     </security:authentication-manager>
 
     <security:http auto-config="true" use-expressions="true">
@@ -23,11 +25,12 @@
         <security:intercept-url pattern="/login" access="permitAll()"/>
         <security:intercept-url pattern="/offers" access="permitAll()"/>
         <security:intercept-url pattern="/credits" access="permitAll()"/>
-        <security:intercept-url pattern="/registration" access="permitAll()"/>
-        <security:intercept-url pattern="/registrationsubmit" access="permitAll()"/>
-        <security:intercept-url pattern="/courses" access="permitAll()"/>
+        <security:intercept-url pattern="/searchForm" access="permitAll()"/>
+        <security:intercept-url pattern="/registration" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/registrationsubmit" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/courses" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/createoffer" access="hasRole('ROLE_USER')"/>
-        <security:intercept-url pattern="/docreate" access="permitAll()"/>
+        <security:intercept-url pattern="/docreate" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/resources/**" access="permitAll()"/>
         <security:intercept-url pattern="/**" access="denyAll()"/>
 

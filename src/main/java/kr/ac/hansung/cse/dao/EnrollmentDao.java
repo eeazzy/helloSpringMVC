@@ -21,7 +21,6 @@ public class EnrollmentDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    // Query to get a single enrollment by course_name (primary key)
     public Enrollment getEnrollment(String courseName) {
         String sqlStatement = "SELECT * FROM enrollment WHERE course_name = ?";
         return jdbcTemplate.queryForObject(sqlStatement, new Object[]{courseName}, new RowMapper<Enrollment>() {
@@ -39,7 +38,6 @@ public class EnrollmentDao {
         });
     }
 
-    // Query to get multiple enrollments
     public List<Enrollment> getEnrollments() {
         String sqlStatement = "SELECT * FROM enrollment";
         return jdbcTemplate.query(sqlStatement, new RowMapper<Enrollment>() {
@@ -57,21 +55,9 @@ public class EnrollmentDao {
         });
     }
 
-    // Insert a new enrollment record
     public boolean insert(Enrollment enrollment) {
         String sqlStatement = "INSERT INTO enrollment (year, semester, course_name, course_type, instructor_name, credit) VALUES (?, ?, ?, ?, ?, ?)";
         return jdbcTemplate.update(sqlStatement, enrollment.getYear(), enrollment.getSemester(), enrollment.getCourseName(), enrollment.getCourseType(), enrollment.getInstructorName(), enrollment.getCredit()) == 1;
     }
 
-    // Update an existing enrollment record
-    public boolean update(Enrollment enrollment) {
-        String sqlStatement = "UPDATE enrollment SET year = ?, semester = ?, course_type = ?, instructor_name = ?, credit = ? WHERE course_name = ?";
-        return jdbcTemplate.update(sqlStatement, enrollment.getYear(), enrollment.getSemester(), enrollment.getCourseType(), enrollment.getInstructorName(), enrollment.getCredit(), enrollment.getCourseName()) == 1;
-    }
-
-    // Delete an enrollment record by course_name
-    public boolean delete(String courseName) {
-        String sqlStatement = "DELETE FROM enrollment WHERE course_name = ?";
-        return jdbcTemplate.update(sqlStatement, courseName) == 1;
-    }
 }
