@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<sf:form method="post" action="${pageContext.request.contextPath}/docreate" modelAttribute="offer">
+<sf:form method="post" action="${pageContext.request.contextPath}/docreateOffer" modelAttribute="offer">
     <table class="formtable">
         <tr>
             <td class="label"> Name:</td>
@@ -37,3 +37,5 @@
 </sf:form>
 </body>
 </html>
+
+<%-- login. jsp와 createoffer.jsp의 차이점 : js로 쓰면 token을 보내주어야하는데 spring을 사용하면 자동으로 보내준다--%>

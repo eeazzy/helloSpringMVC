@@ -36,7 +36,7 @@ public class OfferController {
         return "createoffer";
     }
 
-    @PostMapping("/docreate")
+    @PostMapping("/docreateOffer")
     public String doCreate(Model model, @Valid Offer offer, BindingResult result) {
 
         // System.out.println(offer);
