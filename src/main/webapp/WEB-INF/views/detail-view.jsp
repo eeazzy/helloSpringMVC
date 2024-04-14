@@ -33,9 +33,7 @@
     </table>
 
     <div>
-        <form action="${pageContext.request.contextPath}/credits" method="post">
-            <input type="hidden" name="year" value="${year}">
-            <input type="hidden" name="semester" value="${semester}">
+        <form action="${pageContext.request.contextPath}/credits" method="get">
             <button type="submit" class="btn btn-primary">돌아가기</button>
         </form>
     </div>

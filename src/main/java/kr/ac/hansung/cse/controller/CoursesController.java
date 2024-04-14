@@ -31,7 +31,7 @@ public class CoursesController {
         return "credits";
     }
 
-    @PostMapping("/detail-view")
+    @GetMapping("/detail-view")
     public String showDetailView(@RequestParam("year") int year, @RequestParam("semester") int semester, Model model) {
         // 특정 연도와 학기에 해당하는 수강 내역을 조회
         List<Courses> coursesList = coursesService.getCoursesByYearAndSemester(year, semester);

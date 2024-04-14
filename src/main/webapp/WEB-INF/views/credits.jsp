@@ -34,7 +34,7 @@
                 </td>
                 <td><c:out value="${entry.value}" /></td>
                 <td>
-                    <form action="/detail-view" method="post">
+                    <form action="${pageContext.request.contextPath}/detail-view" method="get">
                         <input type="hidden" name="year" value="${keyParts[0]}"/>
                         <input type="hidden" name="semester" value="${keyParts[1]}"/>
                         <button type="submit" class="btn btn-link">상세보기</button>
