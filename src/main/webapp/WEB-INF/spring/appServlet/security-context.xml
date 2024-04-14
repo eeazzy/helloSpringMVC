@@ -24,9 +24,9 @@
         <security:intercept-url pattern="/" access="permitAll()"/>
         <security:intercept-url pattern="/login" access="permitAll()"/>
         <security:intercept-url pattern="/offers" access="permitAll()"/>
-        <security:intercept-url pattern="/credits" access="permitAll()"/>
-        <security:intercept-url pattern="/search-courses" access="permitAll()"/>
-        <security:intercept-url pattern="/detail-view" access="permitAll()"/>
+        <security:intercept-url pattern="/credits" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/search-courses" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/detail-view" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/registration" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/registrationsubmit" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/courses" access="hasRole('ROLE_USER')"/>

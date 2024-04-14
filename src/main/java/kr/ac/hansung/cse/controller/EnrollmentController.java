@@ -16,11 +16,9 @@ import java.util.List;
 @Controller
 public class EnrollmentController {
 
-    // Controller -> Service -> Dao
     @Autowired
     private EnrollmentService enrollmentService;
 
-    // 전체 데이터를 보여주는 페이지
     @GetMapping("/courses")
     public String showCourses(Model model) {
         List<Enrollment> enrollments = enrollmentService.getAllEnrollments();
@@ -29,14 +27,12 @@ public class EnrollmentController {
         return "courses";
     }
 
-    // 입력을 받는 페이지
     @GetMapping("/registration")
     public String createEnrollment(Model model) {
         model.addAttribute("enrollment", new Enrollment());
         return "registration";
     }
 
-    // 입력 완료 시 결과를 보여주는 페이지
     @PostMapping("/docreate")
     public String doCreate(Model model, @Valid Enrollment enrollment, BindingResult result) {
         if (result.hasErrors()) {

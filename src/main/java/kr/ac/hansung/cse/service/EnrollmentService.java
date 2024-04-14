@@ -13,12 +13,10 @@ public class EnrollmentService {
     @Autowired
     private EnrollmentDao enrollmentDao;
 
-    // Get all enrollments
     public List<Enrollment> getAllEnrollments() {
         return enrollmentDao.getEnrollments();
     }
 
-    // Insert a new enrollment
     public void insertEnrollment(Enrollment enrollment) {
         enrollmentDao.insert(enrollment);
     }

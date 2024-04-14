@@ -21,23 +21,6 @@ public class EnrollmentDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public Enrollment getEnrollment(String courseName) {
-        String sqlStatement = "SELECT * FROM enrollment WHERE course_name = ?";
-        return jdbcTemplate.queryForObject(sqlStatement, new Object[]{courseName}, new RowMapper<Enrollment>() {
-            @Override
-            public Enrollment mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Enrollment enrollment = new Enrollment();
-                enrollment.setYear(rs.getInt("year"));
-                enrollment.setSemester(rs.getInt("semester"));
-                enrollment.setCourseName(rs.getString("course_name"));
-                enrollment.setCourseType(rs.getString("course_type"));
-                enrollment.setInstructorName(rs.getString("instructor_name"));
-                enrollment.setCredit(rs.getInt("credit"));
-                return enrollment;
-            }
-        });
-    }
-
     public List<Enrollment> getEnrollments() {
         String sqlStatement = "SELECT * FROM enrollment";
         return jdbcTemplate.query(sqlStatement, new RowMapper<Enrollment>() {

@@ -30,10 +30,8 @@ public class CoursesDao {
      * @return 조회된 과목들의 리스트
      */
     public List<Courses> getCoursesByYearAndSemester(int year, int semester) {
-        // 특정 년도와 학기에 해당하는 과목을 조회하는 SQL 쿼리
         String sqlStatement = "SELECT * FROM courses WHERE year = ? AND semester = ?";
 
-        // SQL 쿼리를 실행하여 결과를 Courses 객체의 리스트로 반환
         return jdbcTemplate.query(sqlStatement, new Object[]{year, semester}, new RowMapper<Courses>() {
             @Override
             public Courses mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -51,7 +49,7 @@ public class CoursesDao {
     }
 
     /**
-     * 데이터베이스에서 모든 과목을 가져옵니다.
+     * 데이터베이스에서 모든 과목을 가져옴
      * @return 모든 과목의 리스트
      */
     public List<Courses> getAllCourses() {
@@ -73,24 +71,4 @@ public class CoursesDao {
         });
     }
 
-    /**
-     * 연도와 학기별로 학점을 합산하여 반환합니다.
-     * @return 연도와 학기별로 학점을 합산한 결과를 담은 Map
-     */
-    public Map<String, Integer> getTotalCreditsGroupedByYearAndSemester() {
-        // 모든 과목을 가져옵니다.
-        List<Courses> allCourses = getAllCourses();
-
-        // 연도와 학기별로 학점을 합산하여 저장할 Map
-        Map<String, Integer> totalCreditsByYearAndSemester = new HashMap<>();
-
-        // 모든 과목을 연도와 학기별로 그룹화하여 학점을 합산합니다.
-        for (Courses course : allCourses) {
-            String key = course.getYear() + "-" + course.getSemester();
-            totalCreditsByYearAndSemester.putIfAbsent(key, 0);
-            totalCreditsByYearAndSemester.put(key, totalCreditsByYearAndSemester.get(key) + course.getCredit());
-        }
-
-        return totalCreditsByYearAndSemester;
-    }
 }

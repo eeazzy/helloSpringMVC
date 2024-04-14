@@ -10,7 +10,6 @@
 <body>
 <div class="container">
     <h2>취득 학점 조회</h2>
-
     <table class="table table-striped">
         <thead>
         <tr>
@@ -24,12 +23,10 @@
         <c:forEach var="entry" items="${yearSemesterTotalCredits}">
             <tr>
                 <td>
-                    <!-- 문자열 분할을 통해 연도를 구분 -->
                     <c:set var="keyParts" value="${entry.key.split('-')}" />
                     <c:out value="${keyParts[0]}" />
                 </td>
                 <td>
-                    <!-- 문자열 분할을 통해 학기를 구분 -->
                     <c:out value="${keyParts[1]}" />
                 </td>
                 <td><c:out value="${entry.value}" /></td>
@@ -42,10 +39,8 @@
                 </td>
             </tr>
         </c:forEach>
-
         </tbody>
     </table>
-
     <h3>취득 학점 총합: ${totalCredits}</h3>
 </div>
 </body>
