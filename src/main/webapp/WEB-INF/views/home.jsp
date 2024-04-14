@@ -10,7 +10,7 @@
   <div class="container">
       <h2 class="my-4">학사 정보 시스템</h2>
       <div class="list-group mb-3">
-        <a href="${pageContext.request.contextPath}/searchForm" class="list-group-item list-group-item-action">학년별 이수 학점 조회</a>
+        <a href="${pageContext.request.contextPath}/credits" class="list-group-item list-group-item-action">학년별 이수 학점 조회</a>
         <a href="${pageContext.request.contextPath}/registration" class="list-group-item list-group-item-action">수강 신청하기</a>
         <a href="${pageContext.request.contextPath}/courses" class="list-group-item list-group-item-action">수강 신청 조회</a>
     </div>

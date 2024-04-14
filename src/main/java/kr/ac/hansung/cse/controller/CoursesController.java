@@ -1,7 +1,7 @@
 package kr.ac.hansung.cse.controller;
 
-import kr.ac.hansung.cse.model.Courses;
 import kr.ac.hansung.cse.service.CoursesService;
+import kr.ac.hansung.cse.model.Courses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CoursesController {
@@ -21,30 +22,27 @@ public class CoursesController {
         this.coursesService = coursesService;
     }
 
-    // 검색 양식 표시
-    @GetMapping("/search-courses")
-    public String showSearchForm() {
-        return "searchForm"; // 검색 양식이 있는 뷰 (예: searchForm.jsp)
+    @GetMapping("/credits")
+    public String showCredits(Model model) {
+        Map<String, Integer> yearSemesterTotalCredits = coursesService.getTotalCreditsGroupedByYearAndSemester();
+        model.addAttribute("yearSemesterTotalCredits", yearSemesterTotalCredits);
+        int totalCredits = yearSemesterTotalCredits.values().stream().mapToInt(Integer::intValue).sum();
+        model.addAttribute("totalCredits", totalCredits);
+        return "credits";
     }
 
-    // 검색 수행 및 결과 출력
-    @PostMapping("/search-courses")
-    public String searchCourses(@RequestParam("year") int year, @RequestParam("semester") int semester, Model model) {
-        // 특정 년도와 학기에 해당하는 모든 과목을 조회합니다.
+    @PostMapping("/detail-view")
+    public String showDetailView(@RequestParam("year") int year, @RequestParam("semester") int semester, Model model) {
+        // 특정 연도와 학기에 해당하는 수강 내역을 조회
         List<Courses> coursesList = coursesService.getCoursesByYearAndSemester(year, semester);
 
-        // 모델에 조회된 과목 리스트를 추가합니다.
+        // 모델에 수강 내역 추가
         model.addAttribute("coursesList", coursesList);
+        model.addAttribute("year", year);
+        model.addAttribute("semester", semester);
 
-        // 검색 결과를 출력할 뷰 (예: credits.jsp)를 반환합니다.
-        return "credits";
+        // detail-view.jsp 뷰를 반환
+        return "detail-view";
     }
 
-    // 결과 출력 (특정 조회 결과를 보여주는 메서드)
-    @GetMapping("/credits")
-    public String showCourses(Model model) {
-        // 이전 검색 결과를 credits 뷰에서 보여줄 수 있습니다.
-        // `coursesList`가 모델에 이미 추가되었다고 가정합니다.
-        return "credits";
-    }
 }
