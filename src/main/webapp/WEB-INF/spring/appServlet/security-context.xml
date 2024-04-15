@@ -5,12 +5,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:authentication-manager>
-<!--        <security:authentication-provider>-->
-<!--            <security:user-service>-->
-<!--                <security:user name="nykim" authorities="ROLE_USER" password="{noop}letmein"/>-->
-<!--                <security:user name="alice" authorities="ROLE_USER" password="{noop}letmein"/>-->
-<!--            </security:user-service>-->
-<!--        </security:authentication-provider>-->
         <security:authentication-provider>
             <security:jdbc-user-service data-source-ref="dataSource"
                 users-by-username-query="select username, password, true as enabled from Users where username=?"
@@ -23,15 +17,12 @@
     <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/" access="permitAll()"/>
         <security:intercept-url pattern="/login" access="permitAll()"/>
-        <security:intercept-url pattern="/offers" access="permitAll()"/>
         <security:intercept-url pattern="/credits" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/search-courses" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/detail-view" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/registration" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/registrationsubmit" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/courses" access="hasRole('ROLE_USER')"/>
-        <security:intercept-url pattern="/createoffer" access="hasRole('ROLE_USER')"/>
-        <security:intercept-url pattern="/docreate" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/resources/**" access="permitAll()"/>
         <security:intercept-url pattern="/**" access="denyAll()"/>
 
